@@ -17,3 +17,15 @@ test("offline artifact blocks outbound connections and has no remote assets", as
     /\b(?:fetch\s*\(|XMLHttpRequest|WebSocket|sendBeacon|localStorage|indexedDB)\b/,
   );
 });
+
+test("offline artifact contains one complete document and a working bundle", async () => {
+  const html = await fs.readFile(
+    new URL("../dist/SCAT-preprocessor-offline.html", import.meta.url),
+    "utf8",
+  );
+
+  assert.equal((html.match(/<!doctype html>/gi) ?? []).length, 1);
+  assert.doesNotMatch(html, /__(?:SCRIPT|STYLES)__/);
+  assert.match(html, /id="file-input"/);
+  assert.match(html, /for="file-input"/);
+});
