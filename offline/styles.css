@@ -566,7 +566,10 @@ tbody tr:hover td {
 }
 
 .actions-cell {
-  padding-top: 11px;
+  vertical-align: middle;
+}
+
+.actions-wrap {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
