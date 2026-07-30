@@ -253,6 +253,7 @@ main {
   border: 1.5px dashed #a8b6c8;
   border-radius: 13px;
   background: #f9fbfd;
+  cursor: pointer;
   transition: 160ms ease;
 }
 
