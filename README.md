@@ -6,9 +6,9 @@
 
 ## ワンクリックでダウンロード
 
-[**⬇ SCAT前処理ツールをダウンロード**](https://satorumuro.github.io/SCAT-preprocessor/download.html)
+[**⬇ SCAT前処理ツールをダウンロード**](https://github.com/SatoruMuro/SCAT-preprocessor/releases/download/latest/SCAT-preprocessor-offline.html)
 
-上のボタンを押すと、最新版の `SCAT-preprocessor-offline.html` が自動的にダウンロードされます。ダウンロード後は、このHTMLファイルをダブルクリックして起動してください。
+上のボタンを押すと、最新版の `SCAT-preprocessor-offline.html` が直接ダウンロードされます。ZIPの展開は不要です。ダウンロード後は、このHTMLファイルをダブルクリックして起動してください。
 
 ## ダウンロード方法
 
