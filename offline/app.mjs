@@ -228,13 +228,6 @@ function processTranscript() {
 fileInput.addEventListener("change", () => {
   void handleFile(fileInput.files?.[0]);
 });
-dropzone.addEventListener("click", () => fileInput.click());
-dropzone.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" || event.key === " ") {
-    event.preventDefault();
-    fileInput.click();
-  }
-});
 for (const eventName of ["dragenter", "dragover"]) {
   dropzone.addEventListener(eventName, (event) => {
     event.preventDefault();
