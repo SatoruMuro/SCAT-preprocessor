@@ -28,4 +28,5 @@ test("offline artifact contains one complete document and a working bundle", asy
   assert.doesNotMatch(html, /__(?:SCRIPT|STYLES)__/);
   assert.match(html, /id="file-input"/);
   assert.match(html, /for="file-input"/);
+  assert.match(html, /actions-wrap/);
 });
