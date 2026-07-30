@@ -60,18 +60,17 @@ __STYLES__
           </div>
 
           <input id="file-input" type="file" accept=".docx,.txt" hidden />
-          <div
+          <label
             id="dropzone"
             class="dropzone"
-            tabindex="0"
-            role="button"
+            for="file-input"
             aria-label="Wordまたはテキストファイルを選択"
           >
             <div class="document-icon" aria-hidden="true">W</div>
             <strong>Wordファイルをここにドロップ</strong>
             <span>またはクリックして選択</span>
             <small>.docx / .txt</small>
-          </div>
+          </label>
           <div class="upload-footer">
             <p id="file-status" data-kind="neutral">
               まだ文書は読み込まれていません。
