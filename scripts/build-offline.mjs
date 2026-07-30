@@ -29,8 +29,8 @@ const bundle = await build({
 
 const script = bundle.outputFiles[0].text.replace(/<\/script/gi, "<\\/script");
 const html = template
-  .replace("__STYLES__", styles)
-  .replace("__SCRIPT__", script);
+  .replace("__STYLES__", () => styles)
+  .replace("__SCRIPT__", () => script);
 
 await fs.mkdir(outputDirectory, { recursive: true });
 await Promise.all([
