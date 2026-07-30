@@ -1,0 +1,19 @@
+{
+  "name": "scat-preprocessor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "研究データを外部送信せず、逐語録をSCAT形式へ整えるオフラインWebツール",
+  "scripts": {
+    "build": "node scripts/build-offline.mjs",
+    "dev": "npm run build && vite dist --host 0.0.0.0",
+    "test": "npm run build && node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "fflate": "0.8.3"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12",
+    "vite": "7.2.2"
+  }
+}

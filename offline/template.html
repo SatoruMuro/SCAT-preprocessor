@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <title>SCAT前処理ツール</title>
+    <style>
+__STYLES__
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <div>
+          <p class="eyebrow">SCAT PREPROCESSOR</p>
+          <h1>SCAT前処理ツール</h1>
+          <p class="lead">
+            Wordの逐語録を意味のまとまりに分け、SCAT形式のExcelへ整えます。
+          </p>
+        </div>
+        <div class="privacy-badge" aria-label="プライバシー仕様">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span><strong>端末内処理</strong><small>AI・外部送信なし</small></span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="privacy-panel" aria-labelledby="privacy-title">
+        <div class="shield-icon" aria-hidden="true">✓</div>
+        <div>
+          <h2 id="privacy-title">研究データは、この端末から出ません</h2>
+          <p>
+            文書の読み込み、分割、Excel作成はすべてブラウザ内で実行します。AIモデル、API、アクセス解析、クラウド保存は使用しません。
+          </p>
+        </div>
+        <ul>
+          <li>通信機能をプログラムで遮断</li>
+          <li>閉じると内容を破棄</li>
+          <li>オフラインで利用可能</li>
+        </ul>
+      </section>
+
+      <div class="workflow">
+        <section class="card upload-card" aria-labelledby="upload-title">
+          <div class="step-heading">
+            <span class="step-number">1</span>
+            <div>
+              <p class="step-label">UPLOAD</p>
+              <h2 id="upload-title">逐語録を読み込む</h2>
+            </div>
+          </div>
+
+          <input id="file-input" type="file" accept=".docx,.txt" hidden />
+          <label
+            id="dropzone"
+            class="dropzone"
+            for="file-input"
+            aria-label="Wordまたはテキストファイルを選択"
+          >
+            <div class="document-icon" aria-hidden="true">W</div>
+            <strong>Wordファイルをここにドロップ</strong>
+            <span>またはクリックして選択</span>
+            <small>.docx / .txt</small>
+          </label>
+          <div class="upload-footer">
+            <p id="file-status" data-kind="neutral">
+              まだ文書は読み込まれていません。
+            </p>
+            <button id="demo-button" class="text-button" type="button">
+              ダミーデータで試す
+            </button>
+          </div>
+        </section>
+
+        <section id="settings-card" class="card" aria-labelledby="settings-title">
+          <div class="step-heading">
+            <span class="step-number">2</span>
+            <div>
+              <p class="step-label">SEGMENT</p>
+              <h2 id="settings-title">発話者と分割方法を確認</h2>
+            </div>
+          </div>
+
+          <div class="settings-grid">
+            <label class="field-group">
+              <span>発話者の表記</span>
+              <input
+                id="speaker-input"
+                type="text"
+                placeholder="例：A一、サカイ"
+                autocomplete="off"
+              />
+              <small>自動検出後、読点区切りで修正できます。</small>
+            </label>
+            <label class="field-group">
+              <span>分割の細かさ</span>
+              <select id="mode-select">
+                <option value="standard" selected>標準（おすすめ）</option>
+                <option value="fine">細かめ（原則1文ずつ）</option>
+                <option value="coarse">粗め（発言単位）</option>
+              </select>
+              <small>結果は次の画面で分割・結合できます。</small>
+            </label>
+          </div>
+
+          <details class="raw-details">
+            <summary>抽出されたテキストを確認・修正する</summary>
+            <textarea
+              id="extracted-text"
+              rows="9"
+              aria-label="抽出された逐語録"
+              placeholder="文書を読み込むと、ここにテキストが表示されます。"
+            ></textarea>
+          </details>
+
+          <button id="process-button" class="primary-button" type="button" disabled>
+            意味のまとまりに分割する
+          </button>
+        </section>
+      </div>
+
+      <section id="review-card" class="card review-card" aria-labelledby="review-title">
+        <div class="review-header">
+          <div class="step-heading">
+            <span class="step-number">3</span>
+            <div>
+              <p class="step-label">REVIEW</p>
+              <h2 id="review-title">区切りを確認・調整</h2>
+            </div>
+          </div>
+          <div class="review-tools">
+            <span id="row-count" class="count-chip">0行</span>
+            <button id="add-row-button" class="secondary-button" type="button">
+              ＋ 行を追加
+            </button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <colgroup>
+              <col class="col-number" />
+              <col class="col-speaker" />
+              <col class="col-text" />
+              <col class="col-actions" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>番号</th>
+                <th>発話者</th>
+                <th>テクスト</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="rows-body"></tbody>
+          </table>
+          <div id="empty-state" class="empty-state">
+            <strong>分割結果はここに表示されます</strong>
+            <span>まず逐語録を読み込み、「意味のまとまりに分割する」を押してください。</span>
+          </div>
+        </div>
+
+        <div class="export-bar">
+          <div>
+            <strong>SCAT形式で書き出す</strong>
+            <span>
+              番号・発話者・テクストを入力し、分析欄とストーリーライン欄を用意します。
+            </span>
+          </div>
+          <div class="export-actions">
+            <button id="clear-button" class="clear-button" type="button" disabled>
+              データを消去
+            </button>
+            <button id="export-button" class="export-button" type="button" disabled>
+              Excelをダウンロード
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <p class="method-note">
+        このツールはAIによる質的分析を行いません。自動分割は句読点、発話者の切り替わり、接続表現、文章の長さに基づく候補です。最終的な意味単位は研究者が確認してください。
+      </p>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script>
+__SCRIPT__
+    </script>
+  </body>
+</html>
