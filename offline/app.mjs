@@ -149,7 +149,9 @@ function renderRows() {
 
     const actionCell = document.createElement("td");
     actionCell.className = "actions-cell";
-    actionCell.append(
+    const actionButtons = document.createElement("div");
+    actionButtons.className = "actions-wrap";
+    actionButtons.append(
       createButton(
         "分割",
         "row-action primary",
@@ -199,6 +201,7 @@ function renderRows() {
         },
       ),
     );
+    actionCell.append(actionButtons);
 
     row.append(numberCell, speakerCell, textCell, actionCell);
     rowsBody.append(row);
