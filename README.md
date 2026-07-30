@@ -4,14 +4,17 @@
 
 処理はすべてブラウザ内で行います。読み込んだ研究データをサーバーへ送信せず、AIモデル、外部API、アクセス解析、クラウド保存も使用しません。
 
+## ワンクリックでダウンロード
+
+[**⬇ SCAT前処理ツールをダウンロード**](https://satorumuro.github.io/SCAT-preprocessor/download.html)
+
+上のボタンを押すと、最新版の `SCAT-preprocessor-offline.html` が自動的にダウンロードされます。ダウンロード後は、このHTMLファイルをダブルクリックして起動してください。
+
 ## ダウンロード方法
 
-1. GitHubのリポジトリ画面を開きます。
-2. `dist` フォルダを開きます。
-3. `SCAT-preprocessor-offline.html` を開きます。
-4. 画面右上のダウンロードボタン（Download raw file）を押して、HTMLファイルをパソコンに保存します。
+通常は、上の「SCAT前処理ツールをダウンロード」ボタンを押すだけです。
 
-リポジトリ全体を保存する場合は、リポジトリ上部の緑色の「Code」ボタンを押し、「Download ZIP」を選択してください。ZIPを展開すると、`dist/SCAT-preprocessor-offline.html` にツール本体があります。
+リポジトリ全体が必要な場合は、リポジトリ上部の緑色の「Code」ボタンを押し、「Download ZIP」を選択してください。ZIPを展開すると、`dist/SCAT-preprocessor-offline.html` にツール本体があります。
 
 ## 起動方法
 
